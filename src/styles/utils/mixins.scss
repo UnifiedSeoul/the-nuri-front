@@ -1,0 +1,24 @@
+// mixin 정의
+@mixin fullScreen{
+  width: 100vw;
+  height: 100vh;
+}
+
+@mixin shadow{
+  box-shadow: 5px 5px 20px;
+}
+
+
+@mixin mobile {
+  @media (max-width: #{$breakpoint-desktop - 1px}) {
+    @content;
+  }
+}
+
+
+// 데스크탑 : 최소 '데스크탑'사이즈
+@mixin desktop {
+  @media (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}

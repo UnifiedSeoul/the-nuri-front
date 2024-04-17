@@ -1,0 +1,21 @@
+.main-wrapper{
+  @include fullScreen;
+
+  .main-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+
+    .custom-job-posting{
+      width: 1200px;
+      margin: 30px 0;
+      .job-posting-group-row{
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+      }
+      
+    }
+  }
+}

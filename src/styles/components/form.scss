@@ -1,1 +1,12 @@
-
+.form-wrapper{
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .form-inputbox{
+    width: 300px;
+    height: 40px;
+  }
+}

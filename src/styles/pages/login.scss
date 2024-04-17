@@ -1,0 +1,6 @@
+.login-wrapper{
+  @include fullScreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,21 @@
+.imageSlider-wrapper{
+  @include shadow;
+  width: 1200px;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  border-radius:20px;
+  background-color: red;
+  margin-top : 20px;
+  
+  .slide-image{
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    // height: 100%;
+  }
+  .slide-image.active {
+    opacity: 1;
+  }
+}

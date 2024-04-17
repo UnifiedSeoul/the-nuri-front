@@ -4,19 +4,28 @@
 @import 'base/typography';
 @import 'base/colors';
 
+// Utils
+@import 'utils/variables';
+@import 'utils/mixins';
+@import 'utils/functions';
+
+// Components
+@import 'components/buttons';
+@import 'components/form';
+@import 'components/imageSlider';
+@import 'components/jobPosting.scss';
+// @import 'components/cards';
+// @import 'components/modals';
+
 // Layout
 @import 'layout/header';
 @import 'layout/footer';
 // @import 'layout/grid';
 // @import 'layout/navigation';
 
-// Components
-@import 'components/buttons';
-// @import 'components/forms';
-// @import 'components/cards';
-// @import 'components/modals';
+// Pages
+@import 'pages/login';
+@import 'pages/main';
 
-// Utils
-@import 'utils/variables';
-@import 'utils/mixins';
-@import 'utils/functions';
+
+
