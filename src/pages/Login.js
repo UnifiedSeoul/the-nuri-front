@@ -11,11 +11,6 @@ const Login = () => {
   const handleUsernameChange = (e) => setUsername(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
 
-  // const handleLogin = (e) => {
-  //   e.preventDefault();
-  // }
-
-
 
   return (
     <div className="login-wrapper">
