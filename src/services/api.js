@@ -1,6 +1,6 @@
-import axios from "axios";
+// import axios from "axios";
 
-const SERVER_URI = "http://localhost:5002"
+// const SERVER_URI = "http://localhost:5002"
 
 export const LoginAPI = async (userId, password) => {
   const data = {
