@@ -9,7 +9,7 @@ const Main = () => {
       <div className='main-container'>
         <ImageSlider />
         <section className='custom-job-posting'>
-          <h2>맞춤 공고</h2>
+          <h2>브랜치 테스트</h2>
           <div className='job-posting-group-row'>
             <JobPosting />
             <JobPosting />
