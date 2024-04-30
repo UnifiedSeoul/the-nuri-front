@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
 import { LoginAPI } from '../services/api';
-
+import { StoreTokenInCookie } from '../Auth/token';
+import { useNavigate } from 'react-router-dom';
 /* SVG */
 import { ReactComponent as FullLogo } from '../images/the-nuri-full-logo.svg';
 
@@ -9,12 +10,19 @@ const Login = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => setUsername(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
   const handleLogin = async () => {
     const response = await LoginAPI(username, password);
     console.log(response);
+    if (response.result === "success") {
+      StoreTokenInCookie(response.return);
+      navigate('/main');
+    } else {
+
+    }
   }
 
 

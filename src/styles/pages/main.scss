@@ -6,14 +6,14 @@
     flex-direction: column;
     align-items: center;
 
-    .map-and-resume{
+    .section-map-and-resume{
       width: 1200px;
       margin: 30px 0;
       display: flex;
       justify-content: space-between;
     }
 
-    .custom-job-posting{
+    .section-custom-job-posting{
       width: 1200px;
       margin: 30px 0;
       .job-posting-group-row{
@@ -23,18 +23,20 @@
       }
     }
 
-    .popular-job-posting{
+    .section-all-job-posting{
       width: 1200px;
+      
       margin: 30px 0;
-      .job-posting-group-wrapper{
-        display:flex;
-        justify-content: space-between;
-        .job-posting-group-col{
-          margin-top: 20px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-        }
+      justify-content: center;
+
+      .all-job-posting-wrapper{
+        display: flex;
+        flex-wrap: wrap;
+
+        align-content: flex-start;
+        width: 1200px;
+        height: 1200px;
+        
       }
     }
   }

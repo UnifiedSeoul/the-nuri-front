@@ -5,11 +5,11 @@ import ProfileImage from '../images/profile_image.png'
 import ResumeImage from '../images/resume.png'
 import LatestPostsImage from '../images/latest_posts.png'
 
-const PostingBox = () => {
+const PostingBox = ({ title, deadline }) => {
   return (
     <div className='PostingBox-wrapper'>
-      <p>채용 내용</p>
-      <p>마감 일자</p>
+      <p>{title}</p>
+      <p>{deadline}</p>
     </div>
   )
 }
