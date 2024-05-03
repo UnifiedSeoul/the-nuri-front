@@ -20,14 +20,20 @@ const PostingInfoBox = () => {
   )
 }
 
-const MapBox = () => {
+const MapBox = ({ navigate }) => {
+  const handleMapClick = () => {
+    navigate('/map');
+
+  };
+
   return (
-    <div className="MapBox-wrapper">
+    <div className="MapBox-wrapper" onClick={handleMapClick}>
       <h2 className="Mapbox-text">지도를 사용해 공고찾기</h2>
       <img className="map-image" src={MapImage} alt="map_image" />
     </div>
-  )
-}
+  );
+};
+
 
 const ProfileBox = () => {
   return (
