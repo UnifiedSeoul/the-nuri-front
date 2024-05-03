@@ -26,16 +26,17 @@
     .section-all-job-posting{
       width: 1200px;
       
+      overflow : scroll;
       margin: 30px 0;
       justify-content: center;
 
       .all-job-posting-wrapper{
         display: flex;
         flex-wrap: wrap;
-
+        height : 800px;
+        overflow : scroll;
         align-content: flex-start;
         width: 1200px;
-        height: 1200px;
         
       }
     }

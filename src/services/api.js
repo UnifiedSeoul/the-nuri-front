@@ -23,13 +23,13 @@ const LoginAPI = async (userId, password) => {
     })
 }
 
-const AllPosting = async (requiredPostings, totalRecivedPostings) => {
+const GetPosting = async (page) => {
 
   const token = GetTokenFromCookie("token");
   console.log(token)
 
 
-  return await axios.get(SERVER_URI + '/jobs', {
+  return await axios.get(`${SERVER_URI}/api/jobs?page=${page}`, {
     headers: {
       'Authorization': `${token}`
     }
@@ -44,4 +44,4 @@ const AllPosting = async (requiredPostings, totalRecivedPostings) => {
 }
 
 
-export { LoginAPI, AllPosting }
+export { LoginAPI, GetPosting }
