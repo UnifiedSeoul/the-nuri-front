@@ -1,6 +1,18 @@
-.login-button{
+.login-button {
   width: 300px;
   height: 50px;
-  margin:5px;
-  background-color: #BBE6E4;
+  margin: 5px;
+  background-color:#BBE6E4;
+}
+
+.curPosition-button {
+  width:30px;
+  height: 30px;
+  background-image: url('../../images/curPosition_image.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position : absolute;
+  left :-40px;
+  top : 250px;
 }
