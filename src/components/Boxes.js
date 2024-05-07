@@ -5,14 +5,19 @@ import ProfileImage from '../images/profile_image.png'
 import ResumeImage from '../images/resume.png'
 import LatestPostsImage from '../images/latest_posts.png'
 
-const PostingBox = () => {
+
+
+const PostingBox = ({ title, deadline, clickPost }) => {
   return (
-    <div className='PostingBox-wrapper'>
-      <p>채용 내용</p>
-      <p>마감 일자</p>
+    <div className='PostingBox-wrapper' onClick={clickPost}>
+      <p>{title}</p>
+      <p>{deadline}</p>
     </div>
   )
 }
+
+
+
 
 const PostingInfoBox = () => {
   return (
@@ -20,14 +25,20 @@ const PostingInfoBox = () => {
   )
 }
 
-const MapBox = () => {
+const MapBox = ({ navigate }) => {
+  const handleMapClick = () => {
+    navigate('/map');
+
+  };
+
   return (
-    <div className="MapBox-wrapper">
+    <div className="MapBox-wrapper" onClick={handleMapClick}>
       <h2 className="Mapbox-text">지도를 사용해 공고찾기</h2>
       <img className="map-image" src={MapImage} alt="map_image" />
     </div>
-  )
-}
+  );
+};
+
 
 const ProfileBox = () => {
   return (
