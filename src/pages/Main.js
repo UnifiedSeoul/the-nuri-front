@@ -3,7 +3,7 @@ import Header from '../components/Header'
 import ImageSlider from '../components/ImageSlider'
 import { PostingBox, MapBox, ProfileBox } from '../components/Boxes'
 import PostingBoxModal from '../components/PostingBoxModal'
-import { GetOnePosting, GetPosting } from '../services/api'
+import { GetOnePosting, GetPosting, GetEduInfo, GetCustomJobs } from '../services/api'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -13,9 +13,12 @@ const Main = () => {
   const [jobs, setJobs] = useState([]);
   const [jobsCnt, setJobsCnt] = useState(0);
 
-  // 맞춤 공고와 인기 공고를 위한 데이터 배열
-  const customJobPostings = Array(4).fill(null);
+  const [edus, setEuds] = useState([]);
+  const [customJobs, setCustomJobs] = useState([]);
+
   const [isNearBottom, setIsNearBottom] = useState(false);
+
+
 
   // 모달 창 띄울지 말지
   const [modalOpen, setModalOpen] = useState({ open: false, jobData: null });
@@ -26,6 +29,24 @@ const Main = () => {
     if (response.result === "success") {
       setJobs([...jobs, ...response.return])
       setJobsCnt(jobsCnt + 1);
+    } else {
+      console.log("에러!");
+    }
+  }
+
+  const getEdu = async () => {
+    const response = await GetEduInfo();
+    if (response.result === "success") {
+      setEuds([...edus, ...response.return])
+    } else {
+      console.log("에러!");
+    }
+  }
+
+  const getCustomJobs = async () => {
+    const response = await GetCustomJobs();
+    if (response.result === "success") {
+      setCustomJobs([...customJobs, ...response.return])
     } else {
       console.log("에러!");
     }
@@ -54,6 +75,8 @@ const Main = () => {
     wrapper.addEventListener('scroll', infiniteScroll);
 
     getJobs()
+    getEdu()
+    getCustomJobs()
     return () => {
       wrapper.removeEventListener('scroll', infiniteScroll);
     };
@@ -119,7 +142,8 @@ const Main = () => {
         <section className='section-custom-job-posting'>
           <h2>맞춤 공고</h2>
           <div className='job-posting-group-row'>
-            {customJobPostings.map((_, index) => <PostingBox key={index} />)}
+            {customJobs.map((job) => <PostingBox title={job.recruitmentTitle
+            } deadline={job.toAcceptanceDate} clickPost={() => clickPost(job.jobId)} />)}
           </div>
         </section>
 
