@@ -31,7 +31,7 @@ const JoinAPI = async (username, password, experiences) => {
     userJobInfoList: experiences
   }
   console.log(JSON.stringify(data))
-  return await axios.post(SERVER_URI + '/join', JSON.stringify(data))
+  return await axios.post(SERVER_URI + '/join', data)
   .then(response => {
     return { result: "success" }
   })

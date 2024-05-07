@@ -73,7 +73,7 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     width: '400px', // 원하는 너비로 설정
-    height: '85%', // 원하는 높이로 설정
+    height: '600px', // 원하는 높이로 설정
     borderRadius: '10px',
     overflowY: 'auto'
   },

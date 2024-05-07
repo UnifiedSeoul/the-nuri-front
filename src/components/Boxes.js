@@ -10,7 +10,7 @@ import LatestPostsImage from '../images/latest_posts.png'
 const PostingBox = ({ title, deadline, clickPost }) => {
   return (
     <div className='PostingBox-wrapper' onClick={clickPost}>
-      <p>{title}</p>
+      <p className='PostingBox-title'>{title}</p>
       <p>{deadline}</p>
     </div>
   )

@@ -69,6 +69,7 @@ const JoinModal = ({ onClose }) => {
         const response = await JoinAPI(username, password, experiences);
         if (response.result === 'success') {
             console.log(response);
+            onClose();
         }
         else {
             window.alert('error: ' + response.result);
