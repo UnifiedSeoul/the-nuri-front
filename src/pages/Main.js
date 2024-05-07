@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../components/Header'
 import ImageSlider from '../components/ImageSlider'
-import { PostingBox, MapBox, ProfileBox, PostingBoxModal } from '../components/Boxes'
-import { GetPosting } from '../services/api'
+import { PostingBox, MapBox, ProfileBox } from '../components/Boxes'
+import PostingBoxModal from '../components/PostingBoxModal'
+import { GetOnePosting, GetPosting } from '../services/api'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -16,16 +17,21 @@ const Main = () => {
   const customJobPostings = Array(4).fill(null);
   const [isNearBottom, setIsNearBottom] = useState(false);
 
+  // 모달 창 띄울지 말지
+  const [modalOpen, setModalOpen] = useState({ open: false, jobData: null });
+  const [scrollPos, setScrollPos] = useState({ scrollX: null, scrollY: null })
+
   const getJobs = async () => {
     const response = await GetPosting(jobsCnt);
     if (response.result === "success") {
       setJobs([...jobs, ...response.return])
       setJobsCnt(jobsCnt + 1);
+    } else {
+      console.log("에러!");
     }
-    console.log(jobs);
   }
 
-
+  // 무한 스크롤
   const infiniteScroll = () => {
     const wrapper = document.querySelector('.all-job-posting-wrapper');
     if (!wrapper) return;
@@ -51,6 +57,7 @@ const Main = () => {
     return () => {
       wrapper.removeEventListener('scroll', infiniteScroll);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -58,43 +65,29 @@ const Main = () => {
       // 여기서 원하는 작업을 수행합니다.
       getJobs()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isNearBottom]);
 
 
 
-  // 모달 창
-  const [modalOpen, isModalOpen] = useState({ open: false, index: -1 });
 
-  const clickPost = (index) => {
-    isModalOpen({ open: true, index: index })
-    console.log(index);
+
+  // 클릭 시 모달 띄움
+  const clickPost = async (jobId) => {
+    const response = await GetOnePosting(jobId);
+    if (response.result === "success") {
+      console.log(response.return);
+      setModalOpen({ open: true, jobData: response.return })
+    } else {
+      console.log("한 개의 공고를 가져오는데 실패하였습니다.");
+    }
   }
 
-  // 항상 가운데
+  // 모달창 위치 가운데로
   useEffect(() => {
     // PostingBoxModal의 위치를 업데이트하는 함수
     const updateModalPosition = () => {
-      const modal = document.querySelector('.PostingBoxModal-wrapper');
-      if (!modal) return;
-
-      // 화면의 가로 및 세로 중앙 좌표 계산
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-
-      // 모달의 너비와 높이
-      const modalWidth = modal.offsetWidth;
-      const modalHeight = modal.offsetHeight;
-
-      // 스크롤된 양을 고려하여 모달의 새로운 위치 계산
-      const scrollX = window.scrollX;
-      const scrollY = window.scrollY;
-
-      const modalX = scrollX + centerX - modalWidth / 2;
-      const modalY = scrollY + centerY - modalHeight / 2;
-
-      // 모달 위치 업데이트
-      modal.style.left = modalX + 'px';
-      modal.style.top = modalY + 'px';
+      setScrollPos({ scrollX: window.scrollX, scrollY: window.scrollY })
     };
 
     // 스크롤 이벤트 핸들러 등록
@@ -116,7 +109,7 @@ const Main = () => {
     <div className='main-wrapper'>
       <Header />
       <div className='main-container'>
-        <PostingBoxModal modalOpen={modalOpen} jobs={jobs} />
+        <PostingBoxModal modalOpen={modalOpen} setModalOpen={setModalOpen} scrollPos={scrollPos} />
         <ImageSlider />
         <section className='section-map-and-resume'>
           <MapBox navigate={navigate} />
@@ -134,11 +127,10 @@ const Main = () => {
           <h2>전체 공고</h2>
           <div className='all-job-posting-wrapper'>
             {
-              jobs.map((job, index) => <PostingBox title={job.recruitmentTitle
-              } deadline={job.toAcceptanceDate} clickPost={() => clickPost(index)} />)
+              jobs.map((job) => <PostingBox title={job.recruitmentTitle
+              } deadline={job.toAcceptanceDate} clickPost={() => clickPost(job.jobId)} />)
             }
           </div>
-
         </section>
       </div>
     </div>
