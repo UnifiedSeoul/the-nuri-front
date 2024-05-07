@@ -1,4 +1,3 @@
-
 .PostingBox-wrapper{
   box-shadow: 5px 5px 20px;
   width: 250px;
@@ -176,4 +175,34 @@
     
   }
 
+}
+
+.JoinModal-container{
+  margin-top: 30px;
+}
+
+.JoinModal-header {
+  font-family: 'MICEGothic Bold';
+  display: flex;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 23px;
+}
+
+.add-button-wrapper {
+  display: flex;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  margin-top: 5px; /* 버튼과 입력란 사이 여백 조정 */
+}
+
+.join-button-wrapper{
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.join-delete-btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 3px;
 }

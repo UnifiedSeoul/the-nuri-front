@@ -4,7 +4,6 @@ import { GetTokenFromCookie } from "../Auth/token";
 const SERVER_URI = "http://localhost:8080"
 
 
-
 const LoginAPI = async (userId, password) => {
   const data = {
     username: userId,
@@ -22,6 +21,24 @@ const LoginAPI = async (userId, password) => {
         return { result: "fail", return: "401" }
       }
     })
+}
+
+const JoinAPI = async (username, password, experiences) => {
+  console.log(experiences);
+  const data = {
+    username: username,
+    password: password,
+    userJobInfoList: experiences
+  }
+  console.log(JSON.stringify(data))
+  return await axios.post(SERVER_URI + '/join', JSON.stringify(data))
+  .then(response => {
+    return { result: "success" }
+  })
+  .catch(error => {
+    console.log("회원가입 실패 ", error.response.status, error.response.data)
+    return { result: "fail" }
+  })
 }
 
 const GetPosting = async (page) => {
@@ -89,4 +106,4 @@ const GetRoute = async (start, end) => {
 
 
 
-export { LoginAPI, GetPosting, GetRoute }
+export { LoginAPI, JoinAPI, GetPosting, GetRoute }
