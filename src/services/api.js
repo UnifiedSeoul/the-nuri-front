@@ -1,7 +1,23 @@
 import axios from "axios";
 import qs from "qs";
 import { GetTokenFromCookie } from "../Auth/token";
-const SERVER_URI = "http://localhost:8080"
+const SERVER_URI = `${process.env.REACT_APP_SERVER}`;
+
+const CheckUser = async () => {
+  const token = GetTokenFromCookie("token");
+  console.log(SERVER_URI);
+  return await axios.get(`${SERVER_URI}/api/check`, {
+    headers: {
+      'Authorization': `${token}`
+    }
+  })
+    .then(response => {
+      return { result: "success" };
+    })
+    .catch(error => {
+      return { result: "fail" }
+    })
+}
 
 
 const LoginAPI = async (userId, password) => {
@@ -9,7 +25,7 @@ const LoginAPI = async (userId, password) => {
     username: userId,
     password: password
   }
-
+  console.log(SERVER_URI);
   return await axios.post(SERVER_URI + '/login', qs.stringify(data))
     .then(response => {
 
@@ -170,4 +186,4 @@ const GetCustomJobs = async () => {
 
 
 
-export { GetCustomJobs, GetEduInfo, GetPostingByDistance, LoginAPI, GetPosting, GetOnePosting, GetRoute, OpenHomepageAPI, JoinAPI }
+export { CheckUser, GetCustomJobs, GetEduInfo, GetPostingByDistance, LoginAPI, GetPosting, GetOnePosting, GetRoute, OpenHomepageAPI, JoinAPI }

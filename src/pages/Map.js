@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import PostingBoxModal from '../components/PostingBoxModal';
 import { GetPostingByDistance } from '../services/api'
+import Header from '../components/Header';
 
-const Map = () => {
+const Map = ({ isLogin, setIsLogin }) => {
 
   const [modalOpen, setModalOpen] = useState({ open: false, jobData: null });
 
-  useEffect(() => {
+  const [isHeader, setIsHeader] = useState(false);
 
+
+
+  useEffect(() => {
     const clickMark = (index, naver, map, jobs, myLocation) => {
       setModalOpen({ open: true, jobData: jobs[index] });
     }
-
 
     const getJobs = async (myLocation, map, naver) => {
       const response = await GetPostingByDistance(myLocation.longitude, myLocation.latitude);
@@ -45,6 +48,7 @@ const Map = () => {
       }
     }
 
+
     // 지도 생성
     const { naver } = window;
     let myLocation = {};
@@ -53,10 +57,6 @@ const Map = () => {
     // 현재 위치 구하기
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        // setMyLocation({
-        //   latitude: position.coords.latitude,
-        //   longitude: position.coords.longitude,
-        // });
         myLocation = { latitude: position.coords.latitude, longitude: position.coords.longitude, }
 
 
@@ -85,16 +85,20 @@ const Map = () => {
         });
 
         getJobs(myLocation, map, naver)
+        setIsHeader(true);
       });
     } else {
       window.alert("현재위치를 알수 없습니다.");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   
   return (
     <>
+      {isHeader && <Header isLogin={isLogin} setIsLogin={setIsLogin} />}
       <div className="Map-wrapper" />
+
       {modalOpen.open && <PostingBoxModal modalOpen={modalOpen} setModalOpen={setModalOpen} />}
     </>);
 }
