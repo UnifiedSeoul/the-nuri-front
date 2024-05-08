@@ -3,11 +3,11 @@ import Header from '../components/Header'
 import ImageSlider from '../components/ImageSlider'
 import { PostingBox, MapBox, EduBox } from '../components/Boxes'
 import PostingBoxModal from '../components/PostingBoxModal'
-import { CheckUser, GetOnePosting, GetPosting, GetEduInfo, GetCustomJobs } from '../services/api'
+// import { CheckUser, GetOnePosting, GetPosting, GetEduInfo, GetCustomJobs } from '../services/api'
+import { GetOnePosting, GetPosting, GetEduInfo, GetCustomJobs } from '../services/api'
 import { useNavigate } from 'react-router-dom';
 
-
-const Main = () => {
+const Main = ({ isLogin, setIsLogin }) => {
   const navigate = useNavigate();
   // 전체 공고 불러오기
   const [jobs, setJobs] = useState([]);
@@ -53,15 +53,14 @@ const Main = () => {
     }
   }
 
-  const checkLoginStatus = async () => {
-    const response = await CheckUser();
-    if (response.result === "fail") {
-      navigate("/login");
-    }
-  };
-
-
-
+  // const checkLoginStatus = async () => {
+  //   const response = await CheckUser();
+  //   if (response.result === "fail") {
+  //     setIsLogin(false);
+  //   } else {
+  //     setIsLogin(true);
+  //   }
+  // };
 
 
 
@@ -82,8 +81,9 @@ const Main = () => {
   };
 
   useEffect(() => {
-    checkLoginStatus(); // 컴포넌트가 마운트될 때 한 번 실행
-  });
+    // checkLoginStatus(); // 컴포넌트가 마운트될 때 한 번 실행
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
 
   useEffect(() => {
@@ -94,7 +94,7 @@ const Main = () => {
 
     getJobs()
     getEdu()
-    getCustomJobs()
+    if (isLogin) { getCustomJobs() }
     return () => {
       wrapper.removeEventListener('scroll', infiniteScroll);
     };
@@ -139,10 +139,10 @@ const Main = () => {
   })
 
 
-
+  console.log(isLogin);
   return (
     <div className='main-wrapper'>
-      <Header />
+      <Header isLogin={isLogin} setIsLogin={setIsLogin} />
       <div className='main-container'>
         <PostingBoxModal modalOpen={modalOpen} setModalOpen={setModalOpen} scrollPos={scrollPos} />
         <ImageSlider />
@@ -175,12 +175,13 @@ const Main = () => {
             <p className='job-posting-subheader'>더누리가 추천해 드려요 🍀</p>
           </div>
           <div className='job-posting-group-row'>
-            {customJobs.map((job) =>
+            {isLogin && customJobs.map((job) =>
               job && <PostingBox
                 title={job.recruitmentTitle}
                 deadline={job.toAcceptanceDate}
                 clickPost={() => clickPost(job.jobId)} />
             )}
+            {!isLogin && <div>로그인이 필요한 서비스입니다.</div>}
           </div>
         </section>
 

@@ -1,22 +1,18 @@
 import axios from "axios";
 import qs from "qs";
 import { GetTokenFromCookie } from "../Auth/token";
-const SERVER_URI = process.env.REACT_APP_SERVER;
+const SERVER_URI = `${process.env.REACT_APP_SERVER}`;
 
 const CheckUser = async () => {
   const token = GetTokenFromCookie("token");
-  return await axios.get(`${SERVER_URI}/`, {
+  console.log(SERVER_URI);
+  return await axios.get(`${SERVER_URI}/api/check`, {
     headers: {
       'Authorization': `${token}`
     }
   })
     .then(response => {
-      console.log("homepage", response.data);
-      if (response.data === "Main Controller : anonymousUser") {
-        console.log("hi")
-        return { result: "fail" }
-      }
-      return { result: "success", return: response.data };
+      return { result: "success" };
     })
     .catch(error => {
       return { result: "fail" }
@@ -29,7 +25,7 @@ const LoginAPI = async (userId, password) => {
     username: userId,
     password: password
   }
-
+  console.log(SERVER_URI);
   return await axios.post(SERVER_URI + '/login', qs.stringify(data))
     .then(response => {
 
