@@ -129,8 +129,9 @@ const Main = () => {
         <PostingBoxModal modalOpen={modalOpen} setModalOpen={setModalOpen} scrollPos={scrollPos} />
         <ImageSlider />
         <section className='section-map-and-resume'>
-          <div className='map-wrapper'>
-            <p className='map-header'>나의 위치와 가까운 일자리를 찾아 드려요 🚩</p>
+          <div className='map-box-wrapper'>
+            {/* <p className='map-box-header'>지도를 사용해 공고 찾기</p> */}
+            <p className='map-box-subheader'>나의 위치와 가까운 일자리를 찾아 드려요 📌</p>
             <MapBox navigate={navigate} />
           </div>
           {/* 교육 정보 임시 띄움 */}
