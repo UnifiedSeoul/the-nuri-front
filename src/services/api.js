@@ -1,7 +1,7 @@
 import axios from "axios";
 import qs from "qs";
 import { GetTokenFromCookie } from "../Auth/token";
-const SERVER_URI = "http://localhost:8080"
+const SERVER_URI = process.env.REACT_APP_SERVER;
 
 const CheckUser = async () => {
   const token = GetTokenFromCookie("token");
