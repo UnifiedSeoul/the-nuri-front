@@ -5,7 +5,6 @@ const SERVER_URI = process.env.REACT_APP_SERVER;
 
 const CheckUser = async () => {
   const token = GetTokenFromCookie("token");
-
   return await axios.get(`${SERVER_URI}/`, {
     headers: {
       'Authorization': `${token}`
@@ -30,14 +29,13 @@ const LoginAPI = async (userId, password) => {
     username: userId,
     password: password
   }
-  console.log(SERVER_URI);
+
   return await axios.post(SERVER_URI + '/login', qs.stringify(data))
     .then(response => {
 
       return { result: "success", return: response.headers.authorization }
     })
     .catch(error => {
-      console.log(error)
       if (error.response.status === 401) {
         console.log("아이디와 비밀번호를 다시 입력하세요.")
         return { result: "fail", return: "401" }
