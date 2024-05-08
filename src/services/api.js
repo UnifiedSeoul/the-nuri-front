@@ -3,6 +3,26 @@ import qs from "qs";
 import { GetTokenFromCookie } from "../Auth/token";
 const SERVER_URI = "http://localhost:8080"
 
+const CheckUser = async () => {
+  const token = GetTokenFromCookie("token");
+  return await axios.get(`${SERVER_URI}/`, {
+    headers: {
+      'Authorization': `${token}`
+    }
+  })
+    .then(response => {
+      console.log("homepage", response.data);
+      if (response.data === "Main Controller : anonymousUser") {
+        console.log("hi")
+        return { result: "fail" }
+      }
+      return { result: "success", return: response.data };
+    })
+    .catch(error => {
+      return { result: "fail" }
+    })
+}
+
 
 const LoginAPI = async (userId, password) => {
   const data = {
@@ -30,15 +50,15 @@ const JoinAPI = async (username, password, experiences) => {
     password: password,
     userJobInfoList: experiences
   }
-  console.log(JSON.stringify(data))
-  return await axios.post(SERVER_URI + '/join', JSON.stringify(data))
-  .then(response => {
-    return { result: "success" }
-  })
-  .catch(error => {
-    console.log("회원가입 실패 ", error.response.status, error.response.data)
-    return { result: "fail" }
-  })
+
+  return await axios.post(SERVER_URI + '/join', data)
+    .then(response => {
+      return { result: "success" }
+    })
+    .catch(error => {
+      console.log("회원가입 실패 ", error.response.status, error.response.data)
+      return { result: "fail" }
+    })
 }
 
 // 페이지 단위로 포스팅 가져옴
@@ -117,7 +137,6 @@ const GetRoute = async (start, end) => {
   // traoptimal	실시간 최적
   // traavoidtoll	무료 우선
   // traavoidcaronly	자동차 전용도로 회피 우선
-  // console.log(process.env.REACT_APP_MAP_CLIENT_ID, process.env.REACT_APP_MAP_CLIENT_SECRET);
   const token = GetTokenFromCookie("token");
   try {
     const response = await axios.get(`${SERVER_URI}/api/path?start=${start}&goal=${end}&option=trafast`, {
@@ -134,7 +153,41 @@ const GetRoute = async (start, end) => {
   }
 };
 
+const GetEduInfo = async () => {
+  const token = GetTokenFromCookie("token");
+  try {
+    const response = await axios.get(`${SERVER_URI}/api/edu`, {
+      headers: {
+        'Authorization': `${token}`
+      }
+    })
+
+    console.log(response.data);
+    return { result: "success", return: response.data }
+  } catch (error) {
+    console.error('Error fetching directions:', error);
+    return { result: "fail" }
+  }
+}
+
+const GetCustomJobs = async () => {
+  const token = GetTokenFromCookie("token");
+  try {
+    const response = await axios.get(`${SERVER_URI}/api/jobs/custom`, {
+      headers: {
+        'Authorization': `${token}`
+      }
+    })
+
+    console.log(response.data);
+    return { result: "success", return: response.data }
+  } catch (error) {
+    console.error('Error fetching directions:', error);
+    return { result: "fail" }
+  }
+}
 
 
 
-export { GetPostingByDistance, LoginAPI, GetPosting, GetOnePosting, GetRoute, OpenHomepageAPI, JoinAPI }
+
+export { CheckUser, GetCustomJobs, GetEduInfo, GetPostingByDistance, LoginAPI, GetPosting, GetOnePosting, GetRoute, OpenHomepageAPI, JoinAPI }

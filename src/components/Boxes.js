@@ -4,20 +4,23 @@ import MapImage from '../images/map_image.png'
 import ProfileImage from '../images/profile_image.png'
 import ResumeImage from '../images/resume.png'
 import LatestPostsImage from '../images/latest_posts.png'
+import { ChangeDate, ChangeDateForPosting } from './DateFormatter'
 
 
 
-const PostingBox = ({ title, deadline, clickPost }) => {
+const PostingBox = ({ title, startDate, deadline, clickPost }) => {
   return (
     <div className='PostingBox-wrapper' onClick={clickPost}>
-      <p>{title}</p>
-      <p>{deadline}</p>
+      <p className='PostingBox-title'>{title}</p>
+      <div className='PostingBox-content-wrapper'>
+        <div className='PostingBox-content-date-header-wrapper'>
+          <p className='PostingBox-content-date-header'>접수 기간</p>
+        </div>
+        <p className='PostingBox-content-date'>{ChangeDateForPosting(startDate)}~{ChangeDateForPosting(deadline)}</p>
+      </div>
     </div>
   )
 }
-
-
-
 
 const PostingInfoBox = () => {
   return (
@@ -61,5 +64,33 @@ const ProfileBox = () => {
   )
 }
 
+const EduBox = ({ title, startDate, endDate, link, registPeople, applyStartDate, applyEndDate }) => {
+  const handlerEduClick = () => {
+    window.open(link, "_blank")
+  }
 
-export { PostingBox, PostingInfoBox, MapBox, ProfileBox }
+  return (
+    <div className='EduBox-wrapper' onClick={handlerEduClick}>
+      <p className='EduBox-header'>{title}</p>
+
+      <div className='EduBox-content-wrapper'>
+        <p className='EduBox-content-header'>교육 기간</p>
+        <p className='EduBox-content'>{ChangeDate(startDate)} ~ {ChangeDate(endDate)}</p>
+      </div>
+
+      <div className='EduBox-content-wrapper'>
+        <p className='EduBox-content-header'>모집 인원</p>
+        <p className='EduBox-content'>{registPeople}명</p>
+      </div>
+
+      <div className='EduBox-content-wrapper'>
+        <p className='EduBox-content-header'>접수 기간</p>
+        <p className='EduBox-content'>{ChangeDate(applyStartDate)} ~ {ChangeDate(applyEndDate)}</p>
+      </div>
+
+    </div>
+  )
+
+}
+
+export { PostingBox, PostingInfoBox, MapBox, ProfileBox, EduBox }

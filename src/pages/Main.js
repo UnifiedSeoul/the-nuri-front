@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../components/Header'
 import ImageSlider from '../components/ImageSlider'
-import { PostingBox, MapBox, ProfileBox } from '../components/Boxes'
+import { PostingBox, MapBox, EduBox } from '../components/Boxes'
 import PostingBoxModal from '../components/PostingBoxModal'
-import { GetOnePosting, GetPosting } from '../services/api'
+import { CheckUser, GetOnePosting, GetPosting, GetEduInfo, GetCustomJobs } from '../services/api'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -13,9 +13,13 @@ const Main = () => {
   const [jobs, setJobs] = useState([]);
   const [jobsCnt, setJobsCnt] = useState(0);
 
-  // 맞춤 공고와 인기 공고를 위한 데이터 배열
-  const customJobPostings = Array(4).fill(null);
+  const [edus, setEuds] = useState([]);
+  const [customJobs, setCustomJobs] = useState([]);
+
   const [isNearBottom, setIsNearBottom] = useState(false);
+
+
+
 
   // 모달 창 띄울지 말지
   const [modalOpen, setModalOpen] = useState({ open: false, jobData: null });
@@ -30,6 +34,36 @@ const Main = () => {
       console.log("에러!");
     }
   }
+
+  const getEdu = async () => {
+    const response = await GetEduInfo();
+    if (response.result === "success") {
+      setEuds([...edus, ...response.return])
+    } else {
+      console.log("에러!");
+    }
+  }
+
+  const getCustomJobs = async () => {
+    const response = await GetCustomJobs();
+    if (response.result === "success") {
+      setCustomJobs([...customJobs, ...response.return])
+    } else {
+      console.log("에러!");
+    }
+  }
+
+  const checkLoginStatus = async () => {
+    const response = await CheckUser();
+    if (response.result === "fail") {
+      navigate("/login");
+    }
+  };
+
+
+
+
+
 
   // 무한 스크롤
   const infiniteScroll = () => {
@@ -48,12 +82,19 @@ const Main = () => {
   };
 
   useEffect(() => {
+    checkLoginStatus(); // 컴포넌트가 마운트될 때 한 번 실행
+  });
+
+
+  useEffect(() => {
     const wrapper = document.querySelector('.all-job-posting-wrapper');
     if (!wrapper) return;
 
     wrapper.addEventListener('scroll', infiniteScroll);
 
     getJobs()
+    getEdu()
+    getCustomJobs()
     return () => {
       wrapper.removeEventListener('scroll', infiniteScroll);
     };
@@ -99,12 +140,6 @@ const Main = () => {
 
 
 
-
-
-
-
-
-
   return (
     <div className='main-wrapper'>
       <Header />
@@ -112,23 +147,55 @@ const Main = () => {
         <PostingBoxModal modalOpen={modalOpen} setModalOpen={setModalOpen} scrollPos={scrollPos} />
         <ImageSlider />
         <section className='section-map-and-resume'>
-          <MapBox navigate={navigate} />
-          <ProfileBox />
+          <div className='map-box-wrapper'>
+            {/* <p className='map-box-header'>지도를 사용해 공고 찾기</p> */}
+            <p className='map-box-subheader'>나의 위치와 가까운 일자리를 찾아 드려요 📌</p>
+            <MapBox navigate={navigate} />
+          </div>
+          {/* 교육 정보 임시 띄움 */}
+          {edus[1] && (
+            <div>
+              <div className='edu-header'>
+                <p>교육 안내</p>
+              </div>
+              <EduBox
+                title={edus[1].SUBJECT}
+                startDate={edus[1].STARTDATE} endDate={edus[1].ENDDATE}
+                link={edus[1].VIEWDETAIL}
+                registPeople={edus[1].REGISTPEOPLE}
+                applyStartDate={edus[1].APPLICATIONSTARTDATE}
+                applyEndDate={edus[1].APPLICATIONENDDATE} />
+            </div>
+          )}
         </section>
 
         <section className='section-custom-job-posting'>
-          <h2>맞춤 공고</h2>
+          <div className='job-posting-header'>
+            <p>맞춤 공고</p>
+            <p className='job-posting-subheader'>더누리가 추천해 드려요 🍀</p>
+          </div>
           <div className='job-posting-group-row'>
-            {customJobPostings.map((_, index) => <PostingBox key={index} />)}
+            {customJobs.map((job) =>
+              job && <PostingBox
+                title={job.recruitmentTitle}
+                deadline={job.toAcceptanceDate}
+                clickPost={() => clickPost(job.jobId)} />
+            )}
           </div>
         </section>
 
         <section className='section-all-job-posting'>
-          <h2>전체 공고</h2>
+          <div className='job-posting-header'>
+            <p>전체 공고</p>
+          </div>
           <div className='all-job-posting-wrapper'>
             {
-              jobs.map((job) => <PostingBox title={job.recruitmentTitle
-              } deadline={job.toAcceptanceDate} clickPost={() => clickPost(job.jobId)} />)
+              jobs.map((job) =>
+                <PostingBox
+                  title={job.recruitmentTitle}
+                  deadline={job.toAcceptanceDate}
+                  startDate={job.fromAcceptanceDate}
+                  clickPost={() => clickPost(job.jobId)} />)
             }
           </div>
         </section>

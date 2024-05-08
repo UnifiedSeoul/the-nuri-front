@@ -1,12 +1,13 @@
 .imageSlider-wrapper{
-  @include shadow;
+  // box-shadow: 5px 5px 10px 0 rgba(151, 151, 151, 0.285);
   width: 1200px;
   height: 400px;
   position: relative;
   overflow: hidden;
   border-radius:20px;
-  background-color: red;
+  // background-color: red;
   margin-top : 20px;
+  margin-bottom: 20px;
   
   .slide-image{
     position: absolute;
