@@ -93,6 +93,7 @@ const Map = ({ isLogin, setIsLogin }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  
   return (
     <>
       {isHeader && <Header isLogin={isLogin} setIsLogin={setIsLogin} />}

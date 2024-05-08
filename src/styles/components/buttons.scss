@@ -55,28 +55,35 @@
   position: absolute;
   right:20px;
   top:20px;
+  cursor: pointer;
 }
 
 .MoveHomepageButton-wrapper{
   height: 100%;
   border-radius: 10px;
   margin-top:20px;
-
+  
   .MoveHomepageButton-false{
     width: 100%;
     height: 100%;
-    background-color: rgb(93, 93, 92);
+    background-color: rgb(164, 164, 164);
     color:white;
     font-size: 20px;
     border-radius: 10px;
+    border: none;
   }
   .MoveHomepageButton-true{
     width: 100%;
     height: 100%;
-    background-color: green;
+    background-color: rgb(123, 176, 246);
     color:white;
-    font-size: 20px;
+    font-size: 23px;
     border-radius: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  .MoveHomepageButton-true:hover{
+    background-color: rgb(129, 166, 213);
   }
 }
 

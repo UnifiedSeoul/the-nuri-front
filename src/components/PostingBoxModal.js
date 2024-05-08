@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { GetRoute } from '../services/api'
 
 import { ModalExitButton, MoveHomepageButton } from './Button';
+import { ChangeDateForPosting } from './DateFormatter';
 
 const PostingBoxModal = ({ modalOpen, setModalOpen }) => {
   const [hour, setHour] = useState("");
@@ -61,7 +62,7 @@ const PostingBoxModal = ({ modalOpen, setModalOpen }) => {
       console.log(start, end);
       const response = await GetRoute(start, end);
       if (response.result === "success") {
-        console.log(response.return);
+        // console.log(response.return);
         // const path = response.return.route.trafast[0].guide.map((pos, index) => (
         //   new naver.maps.LatLng(response.return.route.trafast[0].path[pos.pointIndex][1], response.return.route.trafast[0].path[pos.pointIndex][0])
         // ));
@@ -181,12 +182,13 @@ const PostingBoxModal = ({ modalOpen, setModalOpen }) => {
             <h1 className='PostingBoxModal-info-title'>{modalOpen.jobData.recruitmentTitle
             }</h1>
             <p className='PostingBoxModal-info-date'>
-              {modalOpen.jobData.fromAcceptanceDate.substring(0, 4)}년
+              {/* {modalOpen.jobData.fromAcceptanceDate.substring(0, 4)}년 
               {modalOpen.jobData.fromAcceptanceDate.substring(4, 6)}월
               {modalOpen.jobData.fromAcceptanceDate.substring(6, 8)}일 ~
               {modalOpen.jobData.toAcceptanceDate.substring(0, 4)}년
               {modalOpen.jobData.toAcceptanceDate.substring(4, 6)}월
-              {modalOpen.jobData.toAcceptanceDate.substring(6, 8)}일
+              {modalOpen.jobData.toAcceptanceDate.substring(6, 8)}일 */}
+              {ChangeDateForPosting(modalOpen.jobData.fromAcceptanceDate)} ~ {ChangeDateForPosting(modalOpen.jobData.toAcceptanceDate)}
             </p>
             <div className='PostingBoxModal-info-count'>
               <p className='PostingBoxModal-info-retrieve'>공고 조회 {modalOpen.jobData.viewCount}회</p>

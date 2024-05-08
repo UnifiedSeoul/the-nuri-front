@@ -62,7 +62,7 @@
 
 .PostingBox-wrapper:hover {
   background-color: #c9e9ffc7;
-  border: solid 1px #83ccfdc7;
+  // border: solid 1px #83ccfdc7;
 }
 
 
@@ -89,9 +89,9 @@
     color: rgb(56, 56, 56);
   }
   .map-box-subheader {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     color: rgb(68, 68, 68);
   }
 }
@@ -265,7 +265,7 @@
 
 .EduBox-wrapper:hover {
   background-color: #c9e9ffc7;
-  border: solid 1px #83ccfdc7;
+  // border: solid 1px #83ccfdc7;
 }
 
 .edu-header {
@@ -295,7 +295,7 @@
   flex-direction: column;
   text-align: left;
   .job-posting-subheader{
-    font-size: 15px;
+    font-size: 17px;
     color: rgb(102, 102, 102);
     margin-top: 20px;
   }

@@ -6,6 +6,8 @@ import PostingBoxModal from '../components/PostingBoxModal'
 // import { CheckUser, GetOnePosting, GetPosting, GetEduInfo, GetCustomJobs } from '../services/api'
 import { GetOnePosting, GetPosting, GetEduInfo, GetCustomJobs } from '../services/api'
 import { useNavigate } from 'react-router-dom';
+import Spinner from '../images/spinner.gif'
+
 
 const Main = ({ isLogin, setIsLogin }) => {
   const navigate = useNavigate();
@@ -18,8 +20,7 @@ const Main = ({ isLogin, setIsLogin }) => {
 
   const [isNearBottom, setIsNearBottom] = useState(false);
 
-
-
+  const [isLoading, setIsLoading] = useState(true);
 
   // 모달 창 띄울지 말지
   const [modalOpen, setModalOpen] = useState({ open: false, jobData: null });
@@ -48,6 +49,7 @@ const Main = ({ isLogin, setIsLogin }) => {
     const response = await GetCustomJobs();
     if (response.result === "success") {
       setCustomJobs([...customJobs, ...response.return])
+      setIsLoading(false);
     } else {
       console.log("에러!");
     }
@@ -108,9 +110,6 @@ const Main = ({ isLogin, setIsLogin }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isNearBottom]);
-
-
-
 
 
   // 클릭 시 모달 띄움
@@ -175,13 +174,28 @@ const Main = ({ isLogin, setIsLogin }) => {
             <p className='job-posting-subheader'>더누리가 추천해 드려요 🍀</p>
           </div>
           <div className='job-posting-group-row'>
-            {isLogin && customJobs.map((job) =>
-              job && <PostingBox
-                title={job.recruitmentTitle}
-                deadline={job.toAcceptanceDate}
-                clickPost={() => clickPost(job.jobId)} />
+            {isLogin ? (isLoading ? (
+              <div className='loading-wrapper'>
+                <h3>잠시만 기다려 주세요.</h3>
+                <img src={Spinner} alt="로딩" width="70%" />
+              </div>
+            ) : (
+              // Render custom job postings
+              customJobs.slice(0, 3).map((job) => (
+                <PostingBox
+                  title={job.recruitmentTitle}
+                  startDate={job.fromAcceptanceDate}
+                  deadline={job.toAcceptanceDate}
+                  clickPost={() => clickPost(job.jobId)}
+                />
+              ))
+            )) : (
+              <div style={{width: '100%', height: '50px' , color: 'rgb(255, 100, 100)', 
+              fontWeight: 'bold', marginTop: '20px', backgroundColor: 'whitesmoke', textAlign: 'center',
+              display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                로그인이 필요한 서비스입니다.
+              </div>
             )}
-            {!isLogin && <div>로그인이 필요한 서비스입니다.</div>}
           </div>
         </section>
 
@@ -203,6 +217,6 @@ const Main = ({ isLogin, setIsLogin }) => {
       </div>
     </div>
   )
-}
+};
 
 export default Main;

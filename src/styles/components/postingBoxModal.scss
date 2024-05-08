@@ -1,20 +1,23 @@
 .PostingBoxModal-wrapper{
   width: 800px;
-  height: 1000px;
+  height: auto;
   position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(50%, -70%);
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.132);
   border-radius: 20px;
   background-color: white;
   z-index: 10;
-  padding:20px;
+  padding: 20px;
   opacity: 0;
-  
   &.active{
     opacity: 1;
   }
 
   .PostingBoxModal-info-wrapper{
     margin-top:20px;
+    padding: 10px;
     .PostingBoxModal-info-company{
       font-size:20px;
       font-weight: bold;
@@ -25,6 +28,7 @@
       max-height: 400px;
       font-size:30px;
       font-weight: bold;
+      margin-bottom: 20px;
     }
 
     .PostingBoxModal-info-date{
@@ -33,13 +37,13 @@
 
     .PostingBoxModal-info-count{
       display:flex;
-      background-color: rgb(227, 227, 227);
+      background-color: rgb(229, 238, 250);
       height: 50px;
       align-items: center;
       font-size:20px;
       text-align: center;
       border-radius: 10px;
-      margin-top:20px;
+      margin-top:30px;
 
       .PostingBoxModal-info-retrieve{
         flex: 1;
@@ -93,16 +97,18 @@
     display:flex;
     flex-direction: column;
     margin-top:20px;
+    padding: 10px;
     .PostingBoxModal-notes-title{
       font-size:25px;
       font-weight: bold;
+      margin-bottom: 10px;
     }
     .PostingBoxModal-notes-content-wrapper{
       display: flex;
       align-items: center;
       height: 50px;
       width: 100%;
-      background-color: rgb(174, 173, 173);
+      background-color: rgb(229, 238, 250);
       margin-top:10px;
       border-radius: 10px;
       .PostingBoxModal-notes-content{
@@ -117,10 +123,11 @@
     display: flex;
     flex-direction: column;
     margin-top:20px;
-    
+    padding: 10px;
     .PostingBoxModal-map-title{
       font-size:25px;
       font-weight: bold;
+      margin-bottom: 10px;
     }
 
     // 경로 정보
@@ -129,7 +136,7 @@
       display: flex;
       margin-top:10px;
       border-radius: 10px;
-      border : 2px solid rgb(174, 173, 173);
+      border : 1px solid rgb(174, 173, 173);
       overflow:hidden;
       .PostingBoxModal-map{
         flex:7
