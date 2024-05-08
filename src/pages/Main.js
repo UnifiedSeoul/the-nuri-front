@@ -8,7 +8,6 @@ import { GetOnePosting, GetPosting, GetEduInfo, GetCustomJobs } from '../service
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../images/spinner.gif'
 
-const Main = () => {
 
 const Main = ({ isLogin, setIsLogin }) => {
   const navigate = useNavigate();
@@ -175,7 +174,7 @@ const Main = ({ isLogin, setIsLogin }) => {
             <p className='job-posting-subheader'>더누리가 추천해 드려요 🍀</p>
           </div>
           <div className='job-posting-group-row'>
-            {isLoading ? (
+            {isLogin ? (isLoading ? (
               <div className='loading-wrapper'>
                 <h3>잠시만 기다려 주세요.</h3>
                 <img src={Spinner} alt="로딩" width="70%" />
@@ -190,15 +189,13 @@ const Main = ({ isLogin, setIsLogin }) => {
                   clickPost={() => clickPost(job.jobId)}
                 />
               ))
+            )) : (
+              <div style={{width: '100%', height: '50px' , color: 'rgb(255, 100, 100)', 
+              fontWeight: 'bold', marginTop: '20px', backgroundColor: 'whitesmoke', textAlign: 'center',
+              display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                로그인이 필요한 서비스입니다.
+              </div>
             )}
-          </div>
-            {isLogin && customJobs.map((job) =>
-              job && <PostingBox
-                title={job.recruitmentTitle}
-                deadline={job.toAcceptanceDate}
-                clickPost={() => clickPost(job.jobId)} />
-            )}
-            {!isLogin && <div>로그인이 필요한 서비스입니다.</div>}
           </div>
         </section>
 
@@ -220,6 +217,6 @@ const Main = ({ isLogin, setIsLogin }) => {
       </div>
     </div>
   )
-}
+};
 
 export default Main;
