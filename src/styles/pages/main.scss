@@ -10,7 +10,10 @@
       width: 1200px;
       margin: 30px 0;
       display: flex;
-      justify-content: space-between;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
     }
 
     .section-custom-job-posting{
@@ -32,11 +35,12 @@
 
       .all-job-posting-wrapper{
         display: flex;
+        justify-content: center;
         flex-wrap: wrap;
         height : 800px;
         overflow : scroll;
         align-content: flex-start;
-        width: 1200px;
+        width: 100%;
         
       }
     }

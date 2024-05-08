@@ -50,7 +50,7 @@
   .join-header{
     width: 100%;
     text-align: left;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
     color: rgb(107, 107, 107);
     margin-top: 15px;
@@ -88,4 +88,13 @@ hr {
 /* 수평 스크롤바 */
 ::-webkit-scrollbar:horizontal {
   height: 0; /* 수평 스크롤바 높이를 0으로 설정하여 숨김 */
+}
+
+.map-wrapper {
+  margin-right: auto;
+  .map-header {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
 }

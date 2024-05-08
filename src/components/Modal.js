@@ -101,7 +101,7 @@ const JoinModal = ({ onClose }) => {
                 
                 <div className='join-form-wrapper' style={{marginTop: '20px'}}>
                     <div style={{textAlign: 'center', marginTop: '30px'}}>
-                        <h5 style={{fontWeight: 'bold', fontSize: '17px'}}>경력사항</h5>
+                        <h5 style={{fontWeight: 'bold', fontSize: '20px'}}>경력사항</h5>
                     </div>
                     {experiences.map((experience, index) => (
                         <div key={index}>

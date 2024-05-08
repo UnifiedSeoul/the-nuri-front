@@ -1,29 +1,68 @@
 .PostingBox-wrapper{
-  box-shadow: 5px 5px 10px 0 rgba(27, 27, 27, 0.285);
-  width: 250px;
-  height: 150px;
+  box-shadow: 5px 5px 10px 0 rgba(151, 151, 151, 0.285);
+  width: 350px;
+  height: 200px;
   margin: 20px;
   display: flex;
   flex-direction: column;
-  background-color: whitesmoke;
+  background-color: white;
   border: solid 1px $gray-200;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 15px;
   color: rgb(72, 72, 72);
   cursor: pointer;
+
+  .PostingBox-title{
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  .PostingBox-content-wrapper {
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    .PostingBox-content-date-header-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      .PostingBox-content-date-header{
+        margin-right: 10px;
+        width: 30%;
+        height: auto;
+        background-color: rgb(151, 171, 233);
+        color: white;
+        border-radius: 5px;
+        padding: 3px;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    
+    .PostingBox-content-date{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin-bottom: 10px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }
 
 .PostingBox-wrapper:hover {
   background-color: #c9e9ffc7;
   border: solid 1px #83ccfdc7;
 }
-.PostingBox-title{
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 10px;
-}
+
 
 
 .PostingInfoBox-wrapper{
@@ -40,19 +79,21 @@
 }
 
 .MapBox-wrapper{
-  box-shadow: 5px 5px 20px;
+  // box-shadow: 5px 5px 10px 0 rgba(27, 27, 27, 0.285);
   border-radius: 20px;
   width: 700px;
-  height: 300px;
+  height: 250px;
   overflow: hidden;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-
+  margin-right: auto;
   .Mapbox-text{
     position: absolute;
     z-index: 1;
+    font-size: 30px;
+    color: rgb(57, 57, 57);
   }
   
   .map-image{
@@ -132,4 +173,95 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: 3px;
+}
+
+.EduBox-wrapper {
+  width: auto;
+  height: auto;
+  box-shadow: 5px 5px 10px 0 rgba(83, 83, 83, 0.285);
+  background-color: rgb(255, 255, 255);
+  border: solid 1px $gray-200;
+  border-radius: 10px;
+  color: rgb(72, 72, 72);
+  cursor: pointer;
+  padding: 25px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .EduBox-header{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: auto;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  .EduBox-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    // justify-content: center;
+    margin-bottom: 5px;
+    font-size: 16px;
+    .EduBox-content-header{
+      margin-right: 10px;
+      width: auto;
+      height: 30px;
+      background-color: rgb(151, 171, 233);
+      color: white;
+      border-radius: 5px;
+      padding: 3px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .EduBox-content{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin-bottom: 10px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.EduBox-wrapper:hover {
+  background-color: #c9e9ffc7;
+  border: solid 1px #83ccfdc7;
+}
+
+.edu-header {
+  height: 35px;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  background-color: $gray-200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  color: rgb(56, 56, 56);
+}
+
+.job-posting-header {
+  height: 55px;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  text-align: center;
+  color: rgb(56, 56, 56);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  .job-posting-subheader{
+    font-size: 15px;
+    color: rgb(102, 102, 102);
+    margin-top: 20px;
+  }
 }
