@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../components/Header'
 import ImageSlider from '../components/ImageSlider'
-import { PostingBox, MapBox, ProfileBox, EduBox } from '../components/Boxes'
+import { PostingBox, MapBox, EduBox } from '../components/Boxes'
 import PostingBoxModal from '../components/PostingBoxModal'
-import { GetOnePosting, GetPosting, GetEduInfo, GetCustomJobs } from '../services/api'
+import { CheckUser, GetOnePosting, GetPosting, GetEduInfo, GetCustomJobs } from '../services/api'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -17,6 +17,7 @@ const Main = () => {
   const [customJobs, setCustomJobs] = useState([]);
 
   const [isNearBottom, setIsNearBottom] = useState(false);
+
 
 
 
@@ -52,6 +53,18 @@ const Main = () => {
     }
   }
 
+  const checkLoginStatus = async () => {
+    const response = await CheckUser();
+    if (response.result === "fail") {
+      navigate("/login");
+    }
+  };
+
+
+
+
+
+
   // 무한 스크롤
   const infiniteScroll = () => {
     const wrapper = document.querySelector('.all-job-posting-wrapper');
@@ -67,6 +80,11 @@ const Main = () => {
       setIsNearBottom(false);
     }
   };
+
+  useEffect(() => {
+    checkLoginStatus(); // 컴포넌트가 마운트될 때 한 번 실행
+  });
+
 
   useEffect(() => {
     const wrapper = document.querySelector('.all-job-posting-wrapper');
@@ -139,13 +157,13 @@ const Main = () => {
               <div className='edu-header'>
                 <p>교육 안내</p>
               </div>
-              <EduBox 
-              title={edus[1].SUBJECT}
-              startDate = {edus[1].STARTDATE} endDate = {edus[1].ENDDATE}
-              link={edus[1].VIEWDETAIL}
-              registPeople={edus[1].REGISTPEOPLE}
-              applyStartDate={edus[1].APPLICATIONSTARTDATE}
-              applyEndDate={edus[1].APPLICATIONENDDATE}/>
+              <EduBox
+                title={edus[1].SUBJECT}
+                startDate={edus[1].STARTDATE} endDate={edus[1].ENDDATE}
+                link={edus[1].VIEWDETAIL}
+                registPeople={edus[1].REGISTPEOPLE}
+                applyStartDate={edus[1].APPLICATIONSTARTDATE}
+                applyEndDate={edus[1].APPLICATIONENDDATE} />
             </div>
           )}
         </section>
@@ -156,12 +174,13 @@ const Main = () => {
             <p className='job-posting-subheader'>더누리가 추천해 드려요 🍀</p>
           </div>
           <div className='job-posting-group-row'>
-            {customJobs.map((job) => 
-            {job && <PostingBox 
-              title={job.recruitmentTitle} 
-              deadline={job.toAcceptanceDate}
-              clickPost={() => clickPost(job.jobId)} />})}
-            </div>
+            {customJobs.map((job) =>
+              job && <PostingBox
+                title={job.recruitmentTitle}
+                deadline={job.toAcceptanceDate}
+                clickPost={() => clickPost(job.jobId)} />
+            )}
+          </div>
         </section>
 
         <section className='section-all-job-posting'>
@@ -170,12 +189,12 @@ const Main = () => {
           </div>
           <div className='all-job-posting-wrapper'>
             {
-              jobs.map((job) => 
-              <PostingBox 
-              title={job.recruitmentTitle} 
-              deadline={job.toAcceptanceDate}
-              startDate={job.fromAcceptanceDate}
-              clickPost={() => clickPost(job.jobId)} />)
+              jobs.map((job) =>
+                <PostingBox
+                  title={job.recruitmentTitle}
+                  deadline={job.toAcceptanceDate}
+                  startDate={job.fromAcceptanceDate}
+                  clickPost={() => clickPost(job.jobId)} />)
             }
           </div>
         </section>

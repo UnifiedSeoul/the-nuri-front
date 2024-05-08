@@ -13,5 +13,9 @@ const GetTokenFromCookie = (name) => {
   const token = cookies.get(name)
   return token;
 }
-
-export { GetTokenFromCookie, StoreTokenInCookie }
+const DeleteTokenFromCookie = () => {
+  const cookies = new Cookies();
+  cookies.remove('token', { path: '/' });
+}
+export { DeleteTokenFromCookie, GetTokenFromCookie, StoreTokenInCookie }
+// export { GetTokenFromCookie, StoreTokenInCookie }

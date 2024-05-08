@@ -4,7 +4,6 @@ import MapImage from '../images/map_image.png'
 import ProfileImage from '../images/profile_image.png'
 import ResumeImage from '../images/resume.png'
 import LatestPostsImage from '../images/latest_posts.png'
-import { Navigate } from 'react-router-dom'
 import { ChangeDate, ChangeDateForPosting } from './DateFormatter'
 
 
@@ -65,7 +64,7 @@ const ProfileBox = () => {
   )
 }
 
-const EduBox = ({title, startDate, endDate, link, registPeople, applyStartDate, applyEndDate}) => {
+const EduBox = ({ title, startDate, endDate, link, registPeople, applyStartDate, applyEndDate }) => {
   const handlerEduClick = () => {
     window.open(link, "_blank")
   }
@@ -78,7 +77,7 @@ const EduBox = ({title, startDate, endDate, link, registPeople, applyStartDate, 
         <p className='EduBox-content-header'>교육 기간</p>
         <p className='EduBox-content'>{ChangeDate(startDate)} ~ {ChangeDate(endDate)}</p>
       </div>
-      
+
       <div className='EduBox-content-wrapper'>
         <p className='EduBox-content-header'>모집 인원</p>
         <p className='EduBox-content'>{registPeople}명</p>

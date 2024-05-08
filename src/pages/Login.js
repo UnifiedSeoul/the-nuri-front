@@ -26,7 +26,7 @@ const Login = () => {
     console.log(response);
     if (response.result === "success") {
       StoreTokenInCookie(response.return);
-      navigate('/main');
+      navigate('/');
     } else {
       window.alert('아이디 또는 비밀번호를 확인하세요.')
       return;
@@ -48,14 +48,14 @@ const Login = () => {
         <FullLogo style={{ width: '48%', height: '100px' }} />
         <input className="form-inputbox" type="text" value={username} onChange={handleUsernameChange} placeholder='아이디를 입력해 주세요' />
         <input className="form-inputbox" type="password" value={password} onChange={handlePasswordChange} placeholder='비밀번호를 입력해 주세요' />
-        <button className="login-button" onClick={handleLogin} style={{marginTop: '30px'}}>로그인</button>
+        <button className="login-button" onClick={handleLogin} style={{ marginTop: '30px' }}>로그인</button>
         <button className="join-button" onClick={handleJoinModalOpen}>회원가입</button>
         {joinModalOpen && (
           <Modal style={customStyles} isOpen={joinModalOpen}>
-            <JoinModal onClose={handleJoinModalClose}/>
+            <JoinModal onClose={handleJoinModalClose} />
           </Modal>
         )}
-        
+
       </div>
     </div>
   )

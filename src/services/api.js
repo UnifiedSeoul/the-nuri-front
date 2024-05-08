@@ -3,6 +3,26 @@ import qs from "qs";
 import { GetTokenFromCookie } from "../Auth/token";
 const SERVER_URI = "http://localhost:8080"
 
+const CheckUser = async () => {
+  const token = GetTokenFromCookie("token");
+  return await axios.get(`${SERVER_URI}/`, {
+    headers: {
+      'Authorization': `${token}`
+    }
+  })
+    .then(response => {
+      console.log("homepage", response.data);
+      if (response.data === "Main Controller : anonymousUser") {
+        console.log("hi")
+        return { result: "fail" }
+      }
+      return { result: "success", return: response.data };
+    })
+    .catch(error => {
+      return { result: "fail" }
+    })
+}
+
 
 const LoginAPI = async (userId, password) => {
   const data = {
@@ -170,4 +190,4 @@ const GetCustomJobs = async () => {
 
 
 
-export { GetCustomJobs, GetEduInfo, GetPostingByDistance, LoginAPI, GetPosting, GetOnePosting, GetRoute, OpenHomepageAPI, JoinAPI }
+export { CheckUser, GetCustomJobs, GetEduInfo, GetPostingByDistance, LoginAPI, GetPosting, GetOnePosting, GetRoute, OpenHomepageAPI, JoinAPI }
