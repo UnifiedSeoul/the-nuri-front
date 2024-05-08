@@ -8,7 +8,7 @@ import { ReactComponent as FullLogo } from '../images/the-nuri-full-logo.svg';
 import Modal from 'react-modal'
 import JoinModal from '../components/Modal';
 
-const Login = () => {
+const Login = ({ setIsLogin }) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -26,6 +26,7 @@ const Login = () => {
     console.log(response);
     if (response.result === "success") {
       StoreTokenInCookie(response.return);
+      setIsLogin(true);
       navigate('/');
     } else {
       window.alert('아이디 또는 비밀번호를 확인하세요.')

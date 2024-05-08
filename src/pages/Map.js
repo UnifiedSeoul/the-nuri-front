@@ -1,30 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import PostingBoxModal from '../components/PostingBoxModal';
-import { CheckUser, GetPostingByDistance } from '../services/api'
-import { useNavigate } from 'react-router-dom';
+import { GetPostingByDistance } from '../services/api'
 import Header from '../components/Header';
 
-const Map = () => {
+const Map = ({ isLogin, setIsLogin }) => {
 
   const [modalOpen, setModalOpen] = useState({ open: false, jobData: null });
-  const [isLogin, setIsLogin] = useState(false);
+
   const [isHeader, setIsHeader] = useState(false);
-  const navigate = useNavigate();
+
+
 
   useEffect(() => {
-    const checkLoginStatus = async () => {
-      const response = await CheckUser();
-      if (response.result === "fail") {
-        navigate("/login");
-      } else {
-        setIsLogin(true);
-      }
-    };
-    checkLoginStatus();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  useEffect(() => {
-    if (!isLogin) return;
     const clickMark = (index, naver, map, jobs, myLocation) => {
       setModalOpen({ open: true, jobData: jobs[index] });
     }
@@ -70,10 +57,6 @@ const Map = () => {
     // 현재 위치 구하기
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        // setMyLocation({
-        //   latitude: position.coords.latitude,
-        //   longitude: position.coords.longitude,
-        // });
         myLocation = { latitude: position.coords.latitude, longitude: position.coords.longitude, }
 
 
@@ -108,11 +91,11 @@ const Map = () => {
       window.alert("현재위치를 알수 없습니다.");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLogin]);
+  }, []);
 
   return (
     <>
-      {isHeader && <Header />}
+      {isHeader && <Header isLogin={isLogin} setIsLogin={setIsLogin} />}
       <div className="Map-wrapper" />
 
       {modalOpen.open && <PostingBoxModal modalOpen={modalOpen} setModalOpen={setModalOpen} />}
