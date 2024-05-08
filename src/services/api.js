@@ -125,7 +125,7 @@ const GetRoute = async (start, end) => {
       }
     })
 
-    console.log(response.data);
+    // console.log(response.data);
     return { result: "success", return: response.data }
   } catch (error) {
     console.error('Error fetching directions:', error);

@@ -69,6 +69,7 @@ const JoinModal = ({ onClose }) => {
         const response = await JoinAPI(username, password, experiences);
         if (response.result === 'success') {
             console.log(response);
+            window.alert('회원 가입이 완료되었습니다.')
             onClose();
         }
         else {

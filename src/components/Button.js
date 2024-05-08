@@ -7,6 +7,9 @@ const MoveHomepageButton = ({ url, jobId }) => {
   const clickButton = async (url, jobId) => {
     const response = await OpenHomepageAPI(jobId);
     if (response.result === "success") {
+      if (!url.startsWith("http://") && !url.startsWith("https://")) {
+          url = "http://" + url;
+      }
       window.open(url, "_blank");
     } else {
       console.log("홈페이지를 불러오는데 실패하였습니다.");
