@@ -140,7 +140,8 @@ const PostingBoxModal = ({ modalOpen, setModalOpen }) => {
         })
       }
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modalOpen.open, modalOpen.jobData]);
 
   // 모달 창 위치 계산
   useEffect(() => {
@@ -161,7 +162,7 @@ const PostingBoxModal = ({ modalOpen, setModalOpen }) => {
       const scrollY = window.scrollY;
 
       const modalX = scrollX + centerX - modalWidth / 2;
-      const modalY = scrollY + centerY - modalHeight / 2;
+      const modalY = scrollY + centerY - modalHeight / 2 + 50;
 
       // 모달 위치 업데이트
       modal.style.left = modalX + 'px';
