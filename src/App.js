@@ -9,7 +9,7 @@ function App() {
   // 로그인 한 유저인지 확인
 
   const [isLogin, setIsLogin] = useState(false);
-
+  console.log("test");
   return (
     <BrowserRouter>
       <Routes>
