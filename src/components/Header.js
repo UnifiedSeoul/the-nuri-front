@@ -15,7 +15,6 @@ const Header = ({ isLogin, setIsLogin }) => {
   }
 
   const clickLogInButton = () => {
-
     navigate('/login');
   }
 
@@ -25,7 +24,7 @@ const Header = ({ isLogin, setIsLogin }) => {
 
   return (
     <div className='header-wrapper'>
-      <FullLogo style={{ width: '178px', height: '60px' }} onClick={clickHomeButton} />
+      <FullLogo style={{ width: '178px', height: '60px', cursor: 'pointer' }} onClick={clickHomeButton} />
       {!isLogin && <LogIn onClick={clickLogInButton} className="header-button" />}
       {isLogin && <Logout onClick={clickLogoutButton} className="header-button" />}
     </div>
