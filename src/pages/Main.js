@@ -7,6 +7,7 @@ import PostingBoxModal from '../components/PostingBoxModal'
 import { GetOnePosting, GetPosting, GetEduInfo, GetCustomJobs } from '../services/api'
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../images/spinner.gif'
+import EduSlider from '../components/EduSlider'
 
 
 const Main = ({ isLogin, setIsLogin }) => {
@@ -147,25 +148,15 @@ const Main = ({ isLogin, setIsLogin }) => {
         <ImageSlider />
         <section className='section-map-and-resume'>
           <div className='map-box-wrapper'>
-            {/* <p className='map-box-header'>지도를 사용해 공고 찾기</p> */}
             <p className='map-box-subheader'>나의 위치와 가까운 일자리를 찾아 드려요 📌</p>
             <MapBox navigate={navigate} />
           </div>
-          {/* 교육 정보 임시 띄움 */}
-          {edus[1] && (
-            <div>
-              <div className='edu-header'>
-                <p>교육 안내</p>
-              </div>
-              <EduBox
-                title={edus[1].SUBJECT}
-                startDate={edus[1].STARTDATE} endDate={edus[1].ENDDATE}
-                link={edus[1].VIEWDETAIL}
-                registPeople={edus[1].REGISTPEOPLE}
-                applyStartDate={edus[1].APPLICATIONSTARTDATE}
-                applyEndDate={edus[1].APPLICATIONENDDATE} />
+          <div style={{width: '400px', height: '100%'}}>
+            <div className='edu-header'>
+              <p>교육 안내</p>
             </div>
-          )}
+          {edus.length > 0 && (<EduSlider edus={edus}/>)}
+          </div>
         </section>
 
         <section className='section-custom-job-posting'>
@@ -198,7 +189,6 @@ const Main = ({ isLogin, setIsLogin }) => {
             )}
           </div>
         </section>
-
         <section className='section-all-job-posting'>
           <div className='job-posting-header'>
             <p>전체 공고</p>

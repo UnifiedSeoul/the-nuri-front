@@ -3,6 +3,7 @@ import { GetRoute } from '../services/api'
 
 import { ModalExitButton, MoveHomepageButton } from './Button';
 import { ChangeDateForPosting } from './DateFormatter';
+import Spinner from '../images/spinner.gif'
 
 const PostingBoxModal = ({ modalOpen, setModalOpen }) => {
   const [hour, setHour] = useState("");
@@ -11,6 +12,7 @@ const PostingBoxModal = ({ modalOpen, setModalOpen }) => {
   const [tollFare, setTollFare] = useState("");
   const [taxiFare, setTaxiFare] = useState("");
   const [fuelPrice, setFuelPrice] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const drawLine = (path, map) => {
@@ -60,6 +62,8 @@ const PostingBoxModal = ({ modalOpen, setModalOpen }) => {
     // 경로 데이터 가져오는 함수
     const getRouteData = async (naver, map, map_start, map_end, start, end, position) => {
       console.log(start, end);
+
+      setIsLoading(true);
       const response = await GetRoute(start, end);
       if (response.result === "success") {
         // console.log(response.return);
@@ -111,8 +115,6 @@ const PostingBoxModal = ({ modalOpen, setModalOpen }) => {
         bounds.extend(map_start);
         bounds.extend(map_end);
         map.fitBounds(bounds);
-
-
 
       } else {
         console.log("실패하였습니다");
@@ -251,6 +253,10 @@ const PostingBoxModal = ({ modalOpen, setModalOpen }) => {
 
           <div className="PostingBoxModal-map-wrapper">
             <h1 className="PostingBoxModal-map-title">가는 길</h1>
+            {/* {isLoading && <div className='loading-wrapper'>
+                <h3>잠시만 기다려 주세요.</h3>
+                <img src={Spinner} alt="로딩" width="70%" />
+              </div>} */}
             <div className="PostingBoxModal-route-wrapper">
               <div className="PostingBoxModal-map" />
               <div className="PostingBoxModal-route-info">
