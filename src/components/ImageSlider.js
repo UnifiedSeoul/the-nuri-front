@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 // images
-import Slide_image1 from '../images/slide-image1.png';
-import Slide_image2 from '../images/slide-image2.png';
-import Slide_image3 from '../images/slide-image3.png';
+import Slide_image1 from '../images/new_slider_image_1.jpg';
+import Slide_image2 from '../images/new_slider_image_3.jpg';
+import Slide_image3 from '../images/new_slider_image_4.jpg';
 
 const ImageSlider = () => {
   const slideImages = [
@@ -12,7 +12,7 @@ const ImageSlider = () => {
     },
     {
       id: 1,
-      img: Slide_image2
+      img: Slide_image2//
     },
     {
       id: 2,
