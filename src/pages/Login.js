@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { ReactComponent as FullLogo } from '../images/the-nuri-full-logo.svg';
 import Modal from 'react-modal'
 import JoinModal from '../components/Modal';
+import Header from '../components/Header';
 
 const Login = ({ setIsLogin }) => {
 
@@ -44,21 +45,25 @@ const Login = ({ setIsLogin }) => {
 
 
   return (
-    <div className="login-wrapper">
-      <div className="form-wrapper">
-        <FullLogo style={{ width: '48%', height: '100px' }} />
-        <input className="form-inputbox" type="text" value={username} onChange={handleUsernameChange} placeholder='아이디를 입력해 주세요' />
-        <input className="form-inputbox" type="password" value={password} onChange={handlePasswordChange} placeholder='비밀번호를 입력해 주세요' />
-        <button className="login-button" onClick={handleLogin} style={{ marginTop: '30px' }}>로그인</button>
-        <button className="join-button" onClick={handleJoinModalOpen}>회원가입</button>
-        {joinModalOpen && (
-          <Modal style={customStyles} isOpen={joinModalOpen}>
-            <JoinModal onClose={handleJoinModalClose} />
-          </Modal>
-        )}
+    <>
+      <Header />
+      <div className="login-wrapper">
 
+        <div className="form-wrapper">
+          <FullLogo style={{ width: '48%', height: '100px' }} />
+          <input className="form-inputbox" type="text" value={username} onChange={handleUsernameChange} placeholder='아이디를 입력해 주세요' />
+          <input className="form-inputbox" type="password" value={password} onChange={handlePasswordChange} placeholder='비밀번호를 입력해 주세요' />
+          <button className="login-button" onClick={handleLogin} style={{ marginTop: '30px' }}>로그인</button>
+          <button className="join-button" onClick={handleJoinModalOpen}>회원가입</button>
+          {joinModalOpen && (
+            <Modal style={customStyles} isOpen={joinModalOpen}>
+              <JoinModal onClose={handleJoinModalClose} />
+            </Modal>
+          )}
+
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
