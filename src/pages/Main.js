@@ -74,7 +74,6 @@ const Main = ({ isLogin, setIsLogin }) => {
     const scrollPosition = wrapper.scrollTop;
     const totalHeight = wrapper.scrollHeight;
     const windowHeight = wrapper.clientHeight;
-    console.log(scrollPosition, totalHeight, windowHeight);
     if (totalHeight - scrollPosition - windowHeight < 400) {
       setIsNearBottom(true);
     } else {

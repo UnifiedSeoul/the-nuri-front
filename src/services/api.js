@@ -24,7 +24,7 @@ const LoginAPI = async (userId, password) => {
     username: userId,
     password: password
   }
-  return await axios.post(SERVER_URI + '/login', qs.stringify(data))
+  return await axios.post(SERVER_URI + '/api/login', qs.stringify(data))
     .then(response => {
 
       return { result: "success", return: response.headers.authorization }
@@ -44,7 +44,7 @@ const JoinAPI = async (username, password, experiences) => {
     userJobInfoList: experiences
   }
 
-  return await axios.post(SERVER_URI + '/join', data)
+  return await axios.post(SERVER_URI + '/api/join', data)
     .then(response => {
       return { result: "success" }
     })
