@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../components/Header'
 import ImageSlider from '../components/ImageSlider'
-import { PostingBox, MapBox, EduBox } from '../components/Boxes'
+import { PostingBox, MapBox } from '../components/Boxes'
 import PostingBoxModal from '../components/PostingBoxModal'
-// import { CheckUser, GetOnePosting, GetPosting, GetEduInfo, GetCustomJobs } from '../services/api'
-import { GetOnePosting, GetPosting, GetEduInfo, GetCustomJobs } from '../services/api'
+import { GetOnePosting, GetPosting, GetEduInfo, GetCustomJobs, CheckUser } from '../services/api'
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../images/spinner.gif'
 import EduSlider from '../components/EduSlider'
+import Footer from '../components/Footer'
 
 
 const Main = ({ isLogin, setIsLogin }) => {
@@ -56,14 +56,13 @@ const Main = ({ isLogin, setIsLogin }) => {
     }
   }
 
-  // const checkLoginStatus = async () => {
-  //   const response = await CheckUser();
-  //   if (response.result === "fail") {
-  //     setIsLogin(false);
-  //   } else {
-  //     setIsLogin(true);
-  //   }
-  // };
+  const checkLoginStatus = async () => {
+    const response = await CheckUser();
+    if (response.result === "success") {
+      setIsLogin(true);
+    }
+  }
+
 
 
 
@@ -84,9 +83,14 @@ const Main = ({ isLogin, setIsLogin }) => {
   };
 
   useEffect(() => {
-    // checkLoginStatus(); // 컴포넌트가 마운트될 때 한 번 실행
+    checkLoginStatus(); // 컴포넌트가 마운트될 때 한 번 실행
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (isLogin) { getCustomJobs() }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLogin])
 
 
   useEffect(() => {
@@ -97,7 +101,6 @@ const Main = ({ isLogin, setIsLogin }) => {
 
     getJobs()
     getEdu()
-    if (isLogin) { getCustomJobs() }
     return () => {
       wrapper.removeEventListener('scroll', infiniteScroll);
     };
@@ -117,7 +120,6 @@ const Main = ({ isLogin, setIsLogin }) => {
   const clickPost = async (jobId) => {
     const response = await GetOnePosting(jobId);
     if (response.result === "success") {
-      console.log(response.return);
       setModalOpen({ open: true, jobData: response.return })
     } else {
       console.log("한 개의 공고를 가져오는데 실패하였습니다.");
@@ -139,7 +141,6 @@ const Main = ({ isLogin, setIsLogin }) => {
   })
 
 
-  console.log(isLogin);
   return (
     <div className='main-wrapper'>
       <Header isLogin={isLogin} setIsLogin={setIsLogin} />
@@ -151,11 +152,11 @@ const Main = ({ isLogin, setIsLogin }) => {
             <p className='map-box-subheader'>나의 위치와 가까운 일자리를 찾아 드려요 📌</p>
             <MapBox navigate={navigate} />
           </div>
-          <div style={{width: '400px', height: '100%'}}>
+          <div style={{ width: '400px', height: '100%' }}>
             <div className='edu-header'>
               <p>교육 안내</p>
             </div>
-          {edus.length > 0 && (<EduSlider edus={edus}/>)}
+            {edus.length > 0 && (<EduSlider edus={edus} />)}
           </div>
         </section>
 
@@ -181,9 +182,11 @@ const Main = ({ isLogin, setIsLogin }) => {
                 />
               ))
             )) : (
-              <div style={{width: '100%', height: '50px' , color: 'rgb(255, 100, 100)', 
-              fontWeight: 'bold', marginTop: '20px', backgroundColor: 'whitesmoke', textAlign: 'center',
-              display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+              <div style={{
+                width: '100%', height: '50px', color: 'rgb(255, 100, 100)',
+                fontWeight: 'bold', marginTop: '20px', backgroundColor: 'whitesmoke', textAlign: 'center',
+                display: 'flex', justifyContent: 'center', alignItems: 'center'
+              }}>
                 로그인이 필요한 서비스입니다.
               </div>
             )}
@@ -205,6 +208,7 @@ const Main = ({ isLogin, setIsLogin }) => {
           </div>
         </section>
       </div>
+      <Footer />
     </div>
   )
 };

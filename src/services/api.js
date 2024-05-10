@@ -5,7 +5,6 @@ const SERVER_URI = `${process.env.REACT_APP_SERVER}`;
 
 const CheckUser = async () => {
   const token = GetTokenFromCookie("token");
-  console.log(SERVER_URI);
   return await axios.get(`${SERVER_URI}/api/check`, {
     headers: {
       'Authorization': `${token}`
@@ -25,7 +24,6 @@ const LoginAPI = async (userId, password) => {
     username: userId,
     password: password
   }
-  console.log(SERVER_URI);
   return await axios.post(SERVER_URI + '/login', qs.stringify(data))
     .then(response => {
 
@@ -40,7 +38,6 @@ const LoginAPI = async (userId, password) => {
 }
 
 const JoinAPI = async (username, password, experiences) => {
-  console.log(experiences);
   const data = {
     username: username,
     password: password,
@@ -67,7 +64,6 @@ const GetPosting = async (page) => {
     }
   })
     .then(response => {
-      console.log("posting", response.data);
       return { result: "success", return: response.data };
     })
     .catch(error => {
@@ -84,7 +80,6 @@ const GetOnePosting = async (jobId) => {
     }
   })
     .then(response => {
-      console.log("posting", response.data);
       return { result: "success", return: response.data };
     })
     .catch(error => {
@@ -101,7 +96,6 @@ const OpenHomepageAPI = async (jobId) => {
     }
   })
     .then(response => {
-      console.log("homepage", response.data);
       return { result: "success", return: response.data };
     })
     .catch(error => {
@@ -110,7 +104,6 @@ const OpenHomepageAPI = async (jobId) => {
 }
 
 const GetPostingByDistance = async (x, y) => {
-  console.log(x, y);
   const token = GetTokenFromCookie("token");
   return await axios.get(`${SERVER_URI}/api/job?x=${x}&y=${y}&distance=50`, {
     headers: {
@@ -118,7 +111,6 @@ const GetPostingByDistance = async (x, y) => {
     }
   })
     .then(response => {
-      console.log("homepage", response.data);
       return { result: "success", return: response.data };
     })
     .catch(error => {
@@ -158,7 +150,7 @@ const GetEduInfo = async () => {
       }
     })
 
-    console.log(response.data);
+
     return { result: "success", return: response.data }
   } catch (error) {
     console.error('Error fetching directions:', error);
@@ -175,7 +167,6 @@ const GetCustomJobs = async () => {
       }
     })
 
-    console.log(response.data);
     return { result: "success", return: response.data }
   } catch (error) {
     console.error('Error fetching directions:', error);

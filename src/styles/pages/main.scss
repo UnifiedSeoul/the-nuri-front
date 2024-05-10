@@ -36,7 +36,7 @@
     .section-all-job-posting{
       width: 1200px;
       
-      overflow : scroll;
+      overflow-y: scroll;
       margin: 30px 0;
       justify-content: center;
 
@@ -48,6 +48,8 @@
         overflow : scroll;
         align-content: flex-start;
         width: 100%;
+        border-top: 1px solid rgb(92, 92, 92);
+        border-bottom: 1px solid rgb(92, 92, 92);
       }
     }
   }
