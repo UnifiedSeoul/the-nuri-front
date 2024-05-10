@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 // images
-import Slide_image1 from '../images/new_slider_image_1.jpg';
-import Slide_image2 from '../images/new_slider_image_3.jpg';
-import Slide_image3 from '../images/new_slider_image_4.jpg';
+import Slide_image1 from '../images/더누리 (1).png';
+import Slide_image2 from '../images/더누리(2).png';
+import Slide_image3 from '../images/더누리(3).gif';
 
 const ImageSlider = () => {
   const slideImages = [
@@ -35,7 +35,7 @@ const ImageSlider = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 3000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [currentIdx, nextSlide]);
