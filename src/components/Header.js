@@ -1,8 +1,6 @@
 import React from 'react'
 /* SVG */
 import { ReactComponent as FullLogo } from '../images/the-nuri-full-logo.svg';
-import { ReactComponent as Logout } from '../images/logout.svg'
-import { ReactComponent as LogIn } from '../images/login.svg'
 import { DeleteTokenFromCookie } from '../Auth/token';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,8 +23,9 @@ const Header = ({ isLogin, setIsLogin }) => {
   return (
     <div className='header-wrapper'>
       <FullLogo style={{ width: '178px', height: '60px', cursor: 'pointer' }} onClick={clickHomeButton} />
-      {!isLogin && <LogIn onClick={clickLogInButton} className="header-button" />}
-      {isLogin && <Logout onClick={clickLogoutButton} className="header-button" />}
+      {!isLogin && <button onClick={clickLogInButton} className="header-button">로그인</button>}
+      {isLogin && <button onClick={clickLogoutButton} className="header-button">로그아웃</button>}
+
     </div>
   )
 }
