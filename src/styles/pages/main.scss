@@ -1,6 +1,6 @@
 .main-wrapper{
   @include fullScreen;
-
+  overflow-x: hidden;
   .main-container{
     display: flex;
     flex-direction: column;
@@ -36,7 +36,7 @@
     .section-all-job-posting{
       width: 1200px;
       
-      overflow-y: scroll;
+      // overflow-y: scroll;
       margin: 30px 0;
       justify-content: center;
 
@@ -45,12 +45,13 @@
         justify-content: center;
         flex-wrap: wrap;
         height : 800px;
-        overflow : scroll;
+        overflow-y: scroll;
         align-content: flex-start;
         width: 100%;
-        border-top: 1px solid rgb(92, 92, 92);
-        border-bottom: 1px solid rgb(92, 92, 92);
+        // border-top: 1px solid rgb(153, 153, 153);
+        // border-bottom: 1px solid rgb(92, 92, 92);
       }
     }
   }
+  
 }

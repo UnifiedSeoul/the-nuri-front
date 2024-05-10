@@ -56,9 +56,11 @@ const Login = ({ setIsLogin }) => {
           <button className="login-button" onClick={handleLogin} style={{ marginTop: '30px' }}>로그인</button>
           <button className="join-button" onClick={handleJoinModalOpen}>회원가입</button>
           {joinModalOpen && (
-            <Modal style={customStyles} isOpen={joinModalOpen}>
-              <JoinModal onClose={handleJoinModalClose} />
-            </Modal>
+            <div>
+              <Modal style={customStyles} isOpen={joinModalOpen}>
+                <JoinModal onClose={handleJoinModalClose} />
+              </Modal>
+            </div>
           )}
 
         </div>
@@ -79,9 +81,10 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     width: '400px', // 원하는 너비로 설정
-    height: '600px', // 원하는 높이로 설정
+    height: '550px', // 원하는 높이로 설정
     borderRadius: '10px',
-    overflowY: 'auto'
+    overflowY: 'auto',
+    marginTop: '50px'
   },
   overlay: {
     /* 모달 배경(오버레이)의 스타일을 정의합니다. */

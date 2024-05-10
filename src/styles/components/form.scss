@@ -80,12 +80,3 @@ hr {
   border:0;
   margin-bottom: 15px;
 }
-
-::-webkit-scrollbar {
-  width: 0; /* 스크롤바 너비를 0으로 설정하여 숨김 */
-}
-
-/* 수평 스크롤바 */
-::-webkit-scrollbar:horizontal {
-  height: 0; /* 수평 스크롤바 높이를 0으로 설정하여 숨김 */
-}
