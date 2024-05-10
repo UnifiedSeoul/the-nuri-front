@@ -22,7 +22,7 @@ const Header = ({ isLogin, setIsLogin }) => {
 
   return (
     <div className='header-wrapper'>
-      <FullLogo style={{ width: '178px', height: '60px', cursor: 'pointer' }} onClick={clickHomeButton} />
+      <FullLogo style={{ width: '172px', height: '60px', marginTop: '15px', cursor: 'pointer' }} onClick={clickHomeButton} />
       {!isLogin && <button onClick={clickLogInButton} className="header-button">로그인</button>}
       {isLogin && <button onClick={clickLogoutButton} className="header-button">로그아웃</button>}
 
