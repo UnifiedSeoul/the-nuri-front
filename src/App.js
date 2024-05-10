@@ -1,15 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState, } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Main from './pages/Main';
 import Map from './pages/Map';
+import { CheckUser } from './services/api'
 
 
 function App() {
   // 로그인 한 유저인지 확인
 
   const [isLogin, setIsLogin] = useState(false);
-  console.log("test");
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      const response = await CheckUser();
+      if (response.result === "success") {
+        setIsLogin(true);
+      }
+    }
+    checkLoginStatus();
+    console.log('test');
+  }, [])
+
+
+
   return (
     <BrowserRouter>
       <Routes>

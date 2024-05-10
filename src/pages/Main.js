@@ -3,7 +3,7 @@ import Header from '../components/Header'
 import ImageSlider from '../components/ImageSlider'
 import { PostingBox, MapBox } from '../components/Boxes'
 import PostingBoxModal from '../components/PostingBoxModal'
-import { GetOnePosting, GetPosting, GetEduInfo, GetCustomJobs, CheckUser } from '../services/api'
+import { GetOnePosting, GetPosting, GetEduInfo, GetCustomJobs } from '../services/api'
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../images/spinner.gif'
 import EduSlider from '../components/EduSlider'
@@ -56,12 +56,6 @@ const Main = ({ isLogin, setIsLogin }) => {
     }
   }
 
-  const checkLoginStatus = async () => {
-    const response = await CheckUser();
-    if (response.result === "success") {
-      setIsLogin(true);
-    }
-  }
 
 
 
@@ -80,11 +74,6 @@ const Main = ({ isLogin, setIsLogin }) => {
       setIsNearBottom(false);
     }
   };
-
-  useEffect(() => {
-    checkLoginStatus(); // 컴포넌트가 마운트될 때 한 번 실행
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     if (isLogin) { getCustomJobs() }
